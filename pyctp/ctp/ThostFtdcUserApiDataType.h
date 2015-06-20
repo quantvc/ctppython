@@ -1,5 +1,3 @@
-
-
 #ifndef THOST_FTDCDATATYPE_H
 #define THOST_FTDCDATATYPE_H
 
