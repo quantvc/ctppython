@@ -223,3 +223,23 @@ CThostFtdcReqUserLoginField *from_CThostFtdcReqUserLoginField(PyObject * p) {
 
     return t;
 }
+
+
+PyObject *new_CThostFtdcUserLogoutField(CThostFtdcUserLogoutField * p) {
+    if (p == NULL) {
+        Py_INCREF(Py_None);
+        return Py_None;
+
+    }
+    return PyObject_CallMethod(mod, "CThostFtdcUserLogoutField", "ss",
+                               p->BrokerID, p->UserID);
+}
+
+CThostFtdcUserLogoutField *from_CThostFtdcUserLogoutField(PyObject * p) {
+    CThostFtdcUserLogoutField *t = (CThostFtdcUserLogoutField *) calloc(1, sizeof(CThostFtdcUserLogoutField));
+    memset(t, 0, sizeof(CThostFtdcUserLogoutField));
+    strcpy(t->BrokerID, PyString_AsString(PyObject_GetAttrString(p, "BrokerID")));
+    strcpy(t->UserID, PyString_AsString(PyObject_GetAttrString(p, "UserID")));
+
+    return t;
+}
