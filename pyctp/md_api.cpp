@@ -279,9 +279,9 @@ static PyObject *Md_ReqUserLogout(PyObject * self, PyObject * args) {
 #define PyMODINIT_FUNC void
 #endif
 
-# todo fix __declspec(dllexport)
+// todo fix __declspec(dllexport)
 
-PyMODINIT_FUNC init_Md() {
+PyMODINIT_FUNC initmd_api() {
     static PyMethodDef MdMethods[] = {
             {"create_MdApi",           create_MdApi,              METH_VARARGS},
             {"Release",                Md_Release,                METH_VARARGS},

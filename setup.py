@@ -1,16 +1,18 @@
 # encoding:utf-8
 import os
-from distutils.extension import Extension
-
-from setuptools import setup, find_packages
 import sys
+
+from setuptools import setup, find_packages, Extension
 
 project_dir = os.path.join(os.path.dirname(__file__), "pyctp")
 
 ctp_dir = os.path.abspath(os.path.join(project_dir, "ctp"))
 
+header_dir = os.path.abspath(os.path.join(project_dir, "header"))
+
 compile_args = []
 extra_link_args = []
+
 package_data = ["ctp/*.xml", "ctp/*.dtd"]
 
 if sys.platform == "linux":
@@ -23,16 +25,17 @@ elif sys.platform == "win32":
     package_data.append("ctp/*.dll")
 
 common_args = {
-    "include_dirs": [ctp_dir],
+    "include_dirs": [ctp_dir, header_dir],
     "library_dirs": [ctp_dir],
     "language": "c++"
 }
 
 extensions = [
-    Extension(name="pyctp",
-              sources=[""],
+    Extension(name="pyctp.md_api",
+              sources=["pyctp/md_api.cpp", "pyctp/api_struct.cpp", "pyctp/md_wrapper.cpp"],
               extra_compile_args=common_args,
               extra_link_args=extra_link_args,
+              libraries=["thostmduserapi"],
               **common_args),
 ]
 
@@ -44,5 +47,5 @@ setup(name="python CTP api",
       include_package_data=True,
       packages=find_packages(),
       package_data={"", package_data},
-      ext_modules=(extensions),
+      ext_modules=extensions,
       )
