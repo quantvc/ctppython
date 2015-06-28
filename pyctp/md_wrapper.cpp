@@ -69,6 +69,18 @@ void MySpiWrapper::OnRspUserLogout(CThostFtdcUserLogoutField *pUserLogout, CThos
     PyGILState_Release(gstate);
 }
 
+void MySpiWrapper::OnRspError(CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) {
+    PyGILState_STATE gstate;
+    gstate = PyGILState_Ensure();
+    Py_Initialize();
+    if (!PyObject_CallMethod(py_spi, "OnRspError", "Nib", new_CThostFtdcRspInfoField(pRspInfo), nRequestID, bIsLast)) {
+        PyErr_Print();
+    }
+    Py_Finalize();
+    PyGILState_Release(gstate);
+}
+
+
 void MySpiWrapper::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField * pDepthMarketData) {
     PyGILState_STATE gstate;
     gstate = PyGILState_Ensure();
@@ -110,16 +122,7 @@ void MySpiWrapper::OnRspUnSubMarketData(CThostFtdcSpecificInstrumentField *pSpec
 }
 
 
-void MySpiWrapper::OnRspError(CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) {
-    PyGILState_STATE gstate;
-    gstate = PyGILState_Ensure();
-    Py_Initialize();
-    if (!PyObject_CallMethod(py_spi, "OnRspError", "Nib", new_CThostFtdcRspInfoField(pRspInfo), nRequestID, bIsLast)) {
-        PyErr_Print();
-    }
-    Py_Finalize();
-    PyGILState_Release(gstate);
-}
+
 
 
 void MySpiWrapper::OnRspSubForQuoteRsp(CThostFtdcSpecificInstrumentField *pSpecificInstrument,
