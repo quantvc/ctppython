@@ -1,4 +1,4 @@
-
+﻿
 
 #if !defined(THOST_FTDCTRADERAPI_H)
 #define THOST_FTDCTRADERAPI_H

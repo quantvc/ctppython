@@ -1,17 +1,20 @@
 #include "MdApi.h"
-#include 'trader_struct.h'
+#include "api_struct.h"
 
 static PyObject *create_MdApi(PyObject * self, PyObject * args) {
     char *path;
     bool bIsUsingUdp;
     bool bIsMulticast;
+    PyObject *py_api;
 
     if (!PyArg_ParseTuple(args, "sbb", &path, &bIsUsingUdp, &bIsMulticast)) {
         return NULL;
     }
-    PyObject *api = CThostFtdcMdApi::CreateFtdcMdApi(path, bIsUsingUdp, bIsMulticast);
-    Py_INCREF(api);
-    return api;
+    CThostFtdcMdApi *api  = CThostFtdcMdApi::CreateFtdcMdApi(path, bIsUsingUdp, bIsMulticast);
+
+    py_api = (PyObject *) api;
+    Py_INCREF(py_api);
+    return py_api;
 
 }
 

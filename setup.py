@@ -33,10 +33,10 @@ common_args = {
 extensions = [
     Extension(name="pyctp.md_api",
               sources=["pyctp/md_api.cpp", "pyctp/api_struct.cpp", "pyctp/md_wrapper.cpp"],
-              extra_compile_args=common_args,
+              extra_compile_args=compile_args,
               extra_link_args=extra_link_args,
               libraries=["thostmduserapi"],
-              **common_args),
+              **common_args)
 ]
 
 setup(name="python CTP api",
@@ -46,6 +46,5 @@ setup(name="python CTP api",
       description="This is CTP wrapper python interface",
       include_package_data=True,
       packages=find_packages(),
-      package_data={"", package_data},
-      ext_modules=extensions,
-      )
+      package_data={"": package_data},
+      ext_modules=extensions)

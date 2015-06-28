@@ -1,5 +1,13 @@
 #include "api_struct.h"
 
+static PyObject *mod = NULL;
+
+PyObject *register_struct(PyObject * self, PyObject * args) {
+    mod = PyTuple_GetItem(args, 0);
+    Py_INCREF(Py_None);
+    return Py_None;
+}
+
 PyObject *new_CThostFtdcRspUserLoginField(CThostFtdcRspUserLoginField * p) {
     if (p == NULL) {
         Py_INCREF(Py_None);

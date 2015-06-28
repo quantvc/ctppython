@@ -1,4 +1,4 @@
-
+﻿
 #if !defined(THOST_FTDCMDAPI_H)
 #define THOST_FTDCMDAPI_H
 

@@ -1,5 +1,5 @@
 #include "MdApi.h"
-#include "trader_struct.h"
+#include "api_struct.h"
 
 MySpiWrapper::MySpiWrapper(PyObject * parent): CThostFtdcMdSpi() {
     py_spi = parent;
