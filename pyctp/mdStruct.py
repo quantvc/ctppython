@@ -23,6 +23,23 @@ class Base(object):
 class CThostFtdcRspUserLoginField(Base):
     def __init__(self, TradingDay, LoginTime, BrokerID, UserID, SystemName, FrontID, SessionID, MaxOrderRef, SHFETime,
                  DCETime, CZCETime, FFEXTime, INETime):
+        """
+
+        :param TradingDay:
+        :param LoginTime:
+        :param BrokerID:
+        :param UserID:
+        :param SystemName:
+        :param FrontID:
+        :param SessionID:
+        :param MaxOrderRef:
+        :param SHFETime:
+        :param DCETime:
+        :param CZCETime:
+        :param FFEXTime:
+        :param INETime:
+        :return:
+        """
         self.TradingDay = TradingDay
         self.LoginTime = LoginTime
         self.BrokerID = BrokerID

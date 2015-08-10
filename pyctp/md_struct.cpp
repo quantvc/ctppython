@@ -1,4 +1,4 @@
-#include "api_struct.h"
+#include "md_struct.h"
 
 static PyObject *mod = NULL;
 
