@@ -1,4 +1,11 @@
-﻿
+/////////////////////////////////////////////////////////////////////////
+///@system 新一代交易所系统
+///@company 上海期货信息技术有限公司
+///@file ThostFtdcTraderApi.h
+///@brief 定义了客户端接口
+///@history 
+///20060106	赵鸿昊		创建该文件
+/////////////////////////////////////////////////////////////////////////
 
 #if !defined(THOST_FTDCTRADERAPI_H)
 #define THOST_FTDCTRADERAPI_H
@@ -111,10 +118,6 @@ public:
     virtual void OnRspQuoteAction(CThostFtdcInputQuoteActionField *pInputQuoteAction, CThostFtdcRspInfoField *pRspInfo,
                                   int nRequestID, bool bIsLast) { };
 
-    ///批量报单操作请求响应
-    virtual void OnRspBatchOrderAction(CThostFtdcInputBatchOrderActionField *pInputBatchOrderAction,
-                                       CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) { };
-
     ///申请组合录入请求响应
     virtual void OnRspCombActionInsert(CThostFtdcInputCombActionField *pInputCombAction,
                                        CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) { };
@@ -221,13 +224,13 @@ public:
     virtual void OnRspQrySecAgentACIDMap(CThostFtdcSecAgentACIDMapField *pSecAgentACIDMap,
                                          CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) { };
 
-    ///请求查询产品报价汇率
-    virtual void OnRspQryProductExchRate(CThostFtdcProductExchRateField *pProductExchRate,
-                                         CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) { };
-
     ///请求查询产品组
     virtual void OnRspQryProductGroup(CThostFtdcProductGroupField *pProductGroup, CThostFtdcRspInfoField *pRspInfo,
                                       int nRequestID, bool bIsLast) { };
+
+    ///请求查询报单手续费响应
+    virtual void OnRspQryInstrumentOrderCommRate(CThostFtdcInstrumentOrderCommRateField *pInstrumentOrderCommRate,
+                                                 CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) { };
 
     ///请求查询期权交易成本响应
     virtual void OnRspQryOptionInstrTradeCost(CThostFtdcOptionInstrTradeCostField *pOptionInstrTradeCost,
@@ -318,10 +321,6 @@ public:
 
     ///保证金监控中心用户令牌
     virtual void OnRtnCFMMCTradingAccountToken(CThostFtdcCFMMCTradingAccountTokenField *pCFMMCTradingAccountToken) { };
-
-    ///批量报单操作错误回报
-    virtual void OnErrRtnBatchOrderAction(CThostFtdcBatchOrderActionField *pBatchOrderAction,
-                                          CThostFtdcRspInfoField *pRspInfo) { };
 
     ///申请组合通知
     virtual void OnRtnCombAction(CThostFtdcCombActionField *pCombAction) { };
@@ -441,10 +440,6 @@ public:
     ///@return 创建出的UserApi
     static CThostFtdcTraderApi *CreateFtdcTraderApi(const char *pszFlowPath = "");
 
-    ///获取API的版本信息
-    ///@retrun 获取到的版本号
-    static const char *GetApiVersion();
-
     ///删除接口对象本身
     ///@remark 不再使用本接口对象时,调用该函数删除接口对象
     virtual void Release() = 0;
@@ -557,9 +552,6 @@ public:
     ///报价操作请求
     virtual int ReqQuoteAction(CThostFtdcInputQuoteActionField *pInputQuoteAction, int nRequestID) = 0;
 
-    ///批量报单操作请求
-    virtual int ReqBatchOrderAction(CThostFtdcInputBatchOrderActionField *pInputBatchOrderAction, int nRequestID) = 0;
-
     ///申请组合录入请求
     virtual int ReqCombActionInsert(CThostFtdcInputCombActionField *pInputCombAction, int nRequestID) = 0;
 
@@ -647,11 +639,12 @@ public:
     ///请求查询二级代理操作员银期权限
     virtual int ReqQrySecAgentACIDMap(CThostFtdcQrySecAgentACIDMapField *pQrySecAgentACIDMap, int nRequestID) = 0;
 
-    ///请求查询产品报价汇率
-    virtual int ReqQryProductExchRate(CThostFtdcQryProductExchRateField *pQryProductExchRate, int nRequestID) = 0;
-
     ///请求查询产品组
     virtual int ReqQryProductGroup(CThostFtdcQryProductGroupField *pQryProductGroup, int nRequestID) = 0;
+
+    ///请求查询报单手续费
+    virtual int ReqQryInstrumentOrderCommRate(CThostFtdcQryInstrumentOrderCommRateField *pQryInstrumentOrderCommRate,
+                                              int nRequestID) = 0;
 
     ///请求查询期权交易成本
     virtual int ReqQryOptionInstrTradeCost(CThostFtdcQryOptionInstrTradeCostField *pQryOptionInstrTradeCost,

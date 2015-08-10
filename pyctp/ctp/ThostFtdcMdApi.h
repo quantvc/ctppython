@@ -1,4 +1,12 @@
-﻿
+/////////////////////////////////////////////////////////////////////////
+///@system 新一代交易所系统
+///@company 上海期货信息技术有限公司
+///@file ThostFtdcMdApi.h
+///@brief 定义了客户端接口
+///@history 
+///20060106	赵鸿昊		创建该文件
+/////////////////////////////////////////////////////////////////////////
+
 #if !defined(THOST_FTDCMDAPI_H)
 #define THOST_FTDCMDAPI_H
 
@@ -79,10 +87,6 @@ public:
     ///modify for udp marketdata
     static CThostFtdcMdApi *CreateFtdcMdApi(const char *pszFlowPath = "", const bool bIsUsingUdp = false,
                                             const bool bIsMulticast = false);
-
-    ///获取API的版本信息
-    ///@retrun 获取到的版本号
-    static const char *GetApiVersion();
 
     ///删除接口对象本身
     ///@remark 不再使用本接口对象时,调用该函数删除接口对象
